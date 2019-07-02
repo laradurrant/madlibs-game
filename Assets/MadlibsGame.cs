@@ -2,11 +2,17 @@
 
 public class MadlibsGame : MonoBehaviour
 {
-
-    private string noun;
-    private string name1;
-    private string name2;
-    private string adjective;
+    /// <summary>
+    ///  This is a Madlimbs Game!!! (don't copywrite us)
+    /// </summary>
+    /// 
+    // These are strings
+    private string noun1;
+    private string personname;
+    private string noun2;
+    private string noun3;
+    private string occupation;
+    private string shape;
 
     public UnityEngine.UI.Text storyText;
     public UnityEngine.UI.Text helpText;
@@ -16,10 +22,13 @@ public class MadlibsGame : MonoBehaviour
 
     void Start()
     {
-        noun = "";
-        name1 = "";
-        name2 = "";
-        adjective = "";
+        noun1 = "";
+        personname = "";
+        noun2 = "";
+        noun3 = "";
+        occupation = "";
+        shape = "";
+    
         storyBox.SetActive(false);
         inputBoxes.SetActive(true);
     }
@@ -32,61 +41,103 @@ public class MadlibsGame : MonoBehaviour
         }
     }
 
-    public void SetNoun(string word)
+    public void SetNoun1(string word)
     {
-        noun = word;
+        noun1 = word;
     }
 
-    public void SetName1(string word)
+    public void SetPersonName(string word)
     {
-        name1 = word;
+        personname = word;
     }
 
-    public void SetName2(string word)
+    public void SetNoun2(string word)
     {
-        name2 = word;
+        noun2 = word;
     }
 
-    public void SetAdjective(string word)
+    public void SetNoun3(string word)
     {
-        adjective = word;
+        noun3 = word;
     }
 
-    public string GetNoun()
+    public void SetOccupation(string word)
     {
-        return noun;
+        occupation = word;
     }
 
-    public string GetName1()
+    public void SetShape(string word)
     {
-        return name1;
+        shape = word;
     }
 
-    public string GetName2()
+    public string GetNoun1()
     {
-        return name2;
+        return noun1;
     }
 
-    public string GetAdjective()
+    public string GetNounParticle()
     {
-        return adjective;
+         string word = GetNoun1();
+
+       if(word[0] == 'a' || word[0] == 'e' || word[0] == 'i' || word[0] == 'o' || word[0] == 'u')
+        {
+            return "an";
+        }
+        else
+        {
+            return "a";
+        }
+    }
+
+    public string GetName()
+    {
+        return personname;
+    }
+
+    public string GetNoun2()
+    {
+        return noun2;
+    }
+
+    public string GetNoun3()
+    {
+        return noun3;
+    }
+
+    public string GetOccupation()
+    {
+        return occupation;
+    }
+
+    public string GetShape()
+    {
+        return shape;
     }
 
     private bool CheckFilledOut()
     {
-        if(GetAdjective() == "")
+        if(GetNoun3() == "")
         {
             return false;
         }
-        else if(GetName1() == "")
+        else if(GetName() == "")
         {
             return false;
         }
-        else if(GetName2() == "")
+        else if(GetNoun2() == "")
         {
             return false;
         }
-        else if(GetNoun() == "")
+        else if(GetNoun1() == "")
+        {
+            return false;
+        }
+        else if (GetOccupation() == "")
+        {
+            return false;
+        }
+        else if (GetShape() == "")
         {
             return false;
         }
@@ -94,14 +145,7 @@ public class MadlibsGame : MonoBehaviour
         {
             return true;
         }
-    }
 
-    public void DisplayStory()
-    {
-        Debug.Log("Once upon a time, there was a " + GetNoun() + ".");
-        Debug.Log("One day our hero " + GetName1() + " decided they wanted to do stuff.");
-        Debug.Log("So they teamed up with " + GetName2() + " and solved crime.");
-        Debug.Log("They formed a pretty " + GetAdjective() + " team.");
     }
 
     public void DisplayStoryUI()
@@ -109,13 +153,26 @@ public class MadlibsGame : MonoBehaviour
         if (CheckFilledOut())
         {
             helpText.text = "";
-            storyText.text = "Once upon a time, there was a " + GetNoun() + ". " +
-                "Its name was " + GetName1() + ". " +
-                "One day our hero " + GetName1() + " decided they wanted to do stuff. " +
-                "It was important stuff. Stuff that only a " + GetNoun() + " could do. " +
-                "So they teamed up with another " + GetNoun() + " named " + GetName2() + " and solved crime. " +
-                "They formed a pretty " + GetAdjective() + " team. " +
+            /*
+             * storyText.text = "Once upon a time, there was a " + GetNoun1() + ". " +
+                "Its personname was " + GetName() + ". " +
+                "One day our hero " + GetName() + " decided they wanted to do stuff. " +
+                "It was important stuff. Stuff that only a " + GetNoun1() + " could do. " +
+                "So they teamed up with another " + GetNoun1() + " named " + GetNoun2() + " and solved crime. " +
+                "They formed a pretty " + GetNoun3() + " team. " +
                 "The End.";
+            
+            storyText.text =
+            "There were lots of things. Big things, small things, big-small things, even smaller things, even bigger things, even bigger smaller big small things, also " + GetNoun3() + "things." +
+                 " One great hero, errr, ball of cheese, that goes by the personname " + GetName() + " discovered these things." +
+                 " It was to their horror that " + GetNoun2() + " Also found these things. It was " + GetNounParticle()  + GetNoun1() + "-(e)y play-musical-real-life-dramatic applause(event-expiriment)." +
+                 "Do I make sneeze?";
+                 */
+            storyText.text =
+            GetName() + " is a normal " + GetOccupation() + ". Then, one day, " + GetNounParticle() + " " + GetNoun1() +
+            " explodes, causing " + GetNounParticle() + " " + GetNoun2() + " to blow up, and a nearby " + GetNoun3() + " erupts" +
+            " into a " + GetShape() + " of flames.";
+           
 
             storyBox.SetActive(true);
             inputBoxes.SetActive(false);
@@ -129,10 +186,12 @@ public class MadlibsGame : MonoBehaviour
     public void ResetStory()
     {
         storyText.text = "";
-        SetAdjective("");
-        SetName1("");
-        SetName2("");
-        SetNoun("");
+        SetNoun3("");
+        SetPersonName("");
+        SetNoun2("");
+        SetNoun1("");
+        SetShape("");
+        SetOccupation("");
         ClearInputFields();
 
         storyBox.SetActive(false);
